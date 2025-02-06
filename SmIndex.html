@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spider-Man Hanging Effect</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            color: white;
+            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            height: 300vh; /* Makes scrolling longer */
+        }
+        .spiderman {
+            position: fixed;
+            top: 0;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .web {
+            width: 10px;
+            position: absolute;
+            top: 0;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="40" viewBox="0 0 10 40"><path d="M5 0 C 7 5, 3 10, 5 15 C 7 20, 3 25, 5 30 C 7 35, 3 40, 5 45" stroke="gray" stroke-width="2" fill="transparent"/><path d="M1 0 C 3 5, 7 10, 1 15 C 3 20, 7 25, 1 30 C 3 35, 7 40, 1 45" stroke="gray" stroke-width="1.5" fill="transparent"/></svg>') repeat-y;
+            background-size: 100% auto;
+        }
+        .spiderman img {
+            width: 200px;
+            position: relative;
+            top: 100px;
+        }
+        .cv-container {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+        }
+        .cv-container h2, .cv-container p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spiderman">
+            <div class="web" id="web"></div>
+            <img src="image.png" alt="Spider-Man" id="spiderman-img">
+        </div>
+    </div>
+    
+    <div class="cv-container">
+        <h2>Ronik Basnet</h2>
+        <p>Email: basnet.ronik622@gmail.com</p>
+        <p>Phone: +977 9862740344</p>
+        <p>Experience: .NET Developer at IT Bridge Nepal</p>
+        <p>Skills: HTML, CSS, C#, .NET, MsSQL, JavaScript, Node.js</p>
+    </div>
+    
+    <script>
+        window.addEventListener("scroll", function() {
+            let scrollValue = window.scrollY;
+            document.getElementById("web").style.height = (100 + scrollValue) + "px";
+            document.getElementById("spiderman-img").style.top = (100 + scrollValue) + "px";
+        });
+    </script>
+</body>
+</html>
