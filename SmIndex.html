@@ -39,18 +39,13 @@
         }
 
         .web {
-            width: 4px;
+            width: 10px;
             position: absolute;
             top: 0;
             height: 100px;
-            background: linear-gradient(to bottom, 
-                transparent 10%,
-                rgba(255,255,255,0.1) 50%,
-                transparent 90%);
-            box-shadow: 0 0 15px var(--neon-blue);
-            transition: height 0.3s ease-out;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="40" viewBox="0 0 10 40"><path d="M5 0 C 7 5, 3 10, 5 15 C 7 20, 3 25, 5 30 C 7 35, 3 40, 5 45" stroke="gray" stroke-width="2" fill="transparent"/><path d="M1 0 C 3 5, 7 10, 1 15 C 3 20, 7 25, 1 30 C 3 35, 7 40, 1 45" stroke="gray" stroke-width="1.5" fill="transparent"/></svg>') repeat-y;
+            background-size: 100% auto;
         }
-
         .spiderman img {
             width: 180px;
             position: relative;
@@ -245,7 +240,7 @@
 
         <div class="main-content">
             <section class="portfolio-section">
-                <h2>Portfolio</h2>
+                <div style="display: flex;justify-content: center;"><h2>Portfolio</h2></div>
                 <div class="portfolio">
                     <div class="project">Project 1</div>
                     <div class="project">Project 2</div>
@@ -253,7 +248,6 @@
                     <div class="project">Project 4</div>
                 </div>
             </section>
-
             <section class="timeline-section">
                 <h2>Web Development Timeline</h2>
                 <div class="timeline">
@@ -274,7 +268,7 @@
             
             web.style.height = (100 + scrollValue * 0.8) + "px";
             spidey.style.top = (100 + scrollValue * 0.9) + "px";
-            spidey.style.transform = `rotate(${scrollValue * 0.1}deg)`;
+            spidey.style.transform = `rotate(${scrollValue * 0.01}deg)`;
         });
 
         // Add smooth scroll behavior
