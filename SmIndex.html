@@ -3,21 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spider-Man Hanging Effect</title>
+    <link rel="icon" href="./portfolio.png">
+    <title>Ronik Basnet</title>
     <style>
+        :root {
+            --primary-red: #E62429;
+            --dark-bg: #0d0d0d;
+            --neon-blue: #00f3ff;
+        }
+
         body {
             margin: 0;
-            background-color: black;
+            background: var(--dark-bg);
             color: white;
             overflow-x: hidden;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
         }
+
         .container {
             display: flex;
             justify-content: center;
             position: relative;
-            height: 300vh; /* Makes scrolling longer */
+            min-height: 100vh;
         }
+
         .spiderman {
             position: fixed;
             top: 0;
@@ -25,31 +35,194 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            z-index: 1000;
         }
+
         .web {
-            width: 10px;
+            width: 4px;
             position: absolute;
             top: 0;
             height: 100px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="40" viewBox="0 0 10 40"><path d="M5 0 C 7 5, 3 10, 5 15 C 7 20, 3 25, 5 30 C 7 35, 3 40, 5 45" stroke="gray" stroke-width="2" fill="transparent"/><path d="M1 0 C 3 5, 7 10, 1 15 C 3 20, 7 25, 1 30 C 3 35, 7 40, 1 45" stroke="gray" stroke-width="1.5" fill="transparent"/></svg>') repeat-y;
-            background-size: 100% auto;
+            background: linear-gradient(to bottom, 
+                transparent 10%,
+                rgba(255,255,255,0.1) 50%,
+                transparent 90%);
+            box-shadow: 0 0 15px var(--neon-blue);
+            transition: height 0.3s ease-out;
         }
+
         .spiderman img {
-            width: 200px;
+            width: 180px;
             position: relative;
             top: 100px;
+            filter: drop-shadow(0 0 10px var(--primary-red));
+            transition: transform 0.3s ease-in-out;
         }
-        .cv-container {
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
             position: absolute;
             top: 50px;
-            left: 50px;
-            background-color: rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cv-container, .main-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .cv-container:hover, .main-content:hover {
+            transform: translateY(-5px);
+        }
+
+        .cv-container {
+            width: 300px;
+            height: fit-content;
+            position: sticky;
+            top: 50px;
+        }
+
+        .cv-container h2 {
+            color: var(--primary-red);
+            margin: 0 0 20px 0;
+            font-size: 2em;
+            text-shadow: 0 0 10px rgba(230, 36, 41, 0.5);
+        }
+
+        .cv-container p {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .cv-container p::before {
+            content: '🕷';
+            margin-right: 10px;
+            filter: drop-shadow(0 0 2px var(--primary-red));
+        }
+
+        .main-content {
+            flex-grow: 1;
+            max-width: 800px;
+        }
+
+        section h2 {
+            font-size: 1.8em;
+            margin: 0 0 30px 0;
+            background: linear-gradient(45deg, var(--neon-blue), var(--primary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .portfolio {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .project {
+            background: rgba(0, 0, 0, 0.4);
             padding: 20px;
             border-radius: 10px;
-            width: 300px;
+            border: 1px solid var(--primary-red);
+            transition: all 0.3s ease;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        .cv-container h2, .cv-container p {
-            margin: 10px 0;
+
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px var(--primary-red);
+        }
+
+        .project::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(230, 36, 41, 0.1), transparent);
+            transform: rotate(45deg);
+        }
+
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .timeline-event {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            position: relative;
+            border-left: 3px solid var(--primary-red);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-event:hover {
+            transform: translateX(10px);
+        }
+
+        .timeline-event::before {
+            content: '🕸';
+            position: absolute;
+            left: -35px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            color: var(--neon-blue);
+        }
+
+        @media (max-width: 768px) {
+            .cards-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cv-container {
+                position: static;
+                width: 100%;
+            }
+            
+            .spiderman {
+                display: none;
+            }
+        }
+
+        @keyframes web-swing {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
         }
     </style>
 </head>
@@ -60,20 +233,58 @@
             <img src="image.png" alt="Spider-Man" id="spiderman-img">
         </div>
     </div>
-    
-    <div class="cv-container">
-        <h2>Ronik Basnet</h2>
-        <p>Email: basnet.ronik622@gmail.com</p>
-        <p>Phone: +977 9862740344</p>
-        <p>Experience: .NET Developer at IT Bridge Nepal</p>
-        <p>Skills: HTML, CSS, C#, .NET, MsSQL, JavaScript, Node.js</p>
+
+    <div class="cards-container">
+        <div class="cv-container">
+            <h2>Ronik Basnet</h2>
+            <p>Email: basnet.ronik622@gmail.com</p>
+            <p>Phone: +977 9862740344</p>
+            <p>Experience: Web Developer at IT Bridge Nepal</p>
+            <p>Skills: HTML, CSS, JavaScript, C#, .NET, React, Node.js</p>
+        </div>
+
+        <div class="main-content">
+            <section class="portfolio-section">
+                <h2>Portfolio</h2>
+                <div class="portfolio">
+                    <div class="project">Project 1</div>
+                    <div class="project">Project 2</div>
+                    <div class="project">Project 3</div>
+                    <div class="project">Project 4</div>
+                </div>
+            </section>
+
+            <section class="timeline-section">
+                <h2>Web Development Timeline</h2>
+                <div class="timeline">
+                    <div class="timeline-event">Graduated with a CSIT Degree: 2024</div>
+                    <div class="timeline-event">Interned at Braindigit Solutions Pvt.Ltd: 2024</div>
+                    <div class="timeline-event">Worked on Minor Solo Projects</div>
+                    <div class="timeline-event">Landed a Developer Job at IT Bridge Nepal: 2025</div>
+                </div>
+            </section>
+        </div>
     </div>
-    
+
     <script>
         window.addEventListener("scroll", function() {
             let scrollValue = window.scrollY;
-            document.getElementById("web").style.height = (100 + scrollValue) + "px";
-            document.getElementById("spiderman-img").style.top = (100 + scrollValue) + "px";
+            const web = document.getElementById("web");
+            const spidey = document.getElementById("spiderman-img");
+            
+            web.style.height = (100 + scrollValue * 0.8) + "px";
+            spidey.style.top = (100 + scrollValue * 0.9) + "px";
+            spidey.style.transform = `rotate(${scrollValue * 0.1}deg)`;
+        });
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>
