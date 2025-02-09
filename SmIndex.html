@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -279,6 +279,381 @@
                     behavior: 'smooth'
                 });
             });
+        });
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./portfolio.png">
+    <title>Ronik Basnet</title>
+    <style>
+        :root {
+            --primary-red: #E62429;
+            --dark-bg: #0d0d0d;
+            --neon-blue: #00f3ff;
+            --light-bg: #f5f5f5;
+            --light-text: #333;
+            --light-card-bg: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            background: var(--dark-bg);
+            color: white;
+            overflow-x: hidden;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.light-theme {
+            background: var(--light-bg);
+            color: var(--light-text);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle img {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+        }
+
+        .light-theme .theme-toggle img {
+            filter: invert(0);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .spiderman {
+            position: fixed;
+            top: 0;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .web {
+            width: 4px;
+            position: absolute;
+            top: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, 
+                transparent 10%,
+                rgba(255,255,255,0.1) 50%,
+                transparent 90%);
+            box-shadow: 0 0 15px var(--neon-blue);
+            transition: height 0.3s ease-out;
+        }
+
+        .spiderman img {
+            width: 180px;
+            position: relative;
+            top: 100px;
+            filter: drop-shadow(0 0 10px var(--primary-red));
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            position: absolute;
+            top: 50px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cv-container, .main-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .light-theme .cv-container,
+        .light-theme .main-content {
+            background: var(--light-card-bg);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .cv-container:hover, .main-content:hover {
+            transform: translateY(-5px);
+        }
+
+        .cv-container {
+            width: 300px;
+            height: fit-content;
+            position: sticky;
+            top: 50px;
+        }
+
+        .cv-container h2 {
+            color: var(--primary-red);
+            margin: 0 0 20px 0;
+            font-size: 2em;
+            text-shadow: 0 0 10px rgba(230, 36, 41, 0.5);
+        }
+
+        .cv-container p {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .light-theme .cv-container p {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .cv-container p::before {
+            content: '🕷';
+            margin-right: 10px;
+            filter: drop-shadow(0 0 2px var(--primary-red));
+        }
+
+        .main-content {
+            flex-grow: 1;
+            max-width: 800px;
+        }
+
+        section h2 {
+            font-size: 1.8em;
+            margin: 0 0 30px 0;
+            background: linear-gradient(45deg, var(--neon-blue), var(--primary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .light-theme section h2 {
+            background: linear-gradient(45deg, #0077ff, #E62429);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .portfolio {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .project {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--primary-red);
+            transition: all 0.3s ease;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .light-theme .project {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px var(--primary-red);
+        }
+
+        .project::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(230, 36, 41, 0.1), transparent);
+            transform: rotate(45deg);
+        }
+
+        .timeline {
+            position: relative;
+            margin: 40px 0;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .light-theme .timeline::before {
+            background: #0077ff;
+            box-shadow: 0 0 10px #0077ff;
+        }
+
+        .timeline-event {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            position: relative;
+            border-left: 3px solid var(--primary-red);
+            transition: transform 0.3s ease;
+        }
+
+        .light-theme .timeline-event {
+            background: rgba(0, 0, 0, 0.05);
+            border-left: 3px solid #0077ff;
+        }
+
+        .timeline-event:hover {
+            transform: translateX(10px);
+        }
+
+        .timeline-event::before {
+            content: '🕸';
+            position: absolute;
+            left: -35px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            color: var(--neon-blue);
+        }
+
+        .light-theme .timeline-event::before {
+            color: #0077ff;
+        }
+
+        @media (max-width: 768px) {
+            .cards-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cv-container {
+                position: static;
+                width: 100%;
+            }
+            
+            .spiderman {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle" id="theme-toggle">
+        <img src="https://www.svgrepo.com/show/309493/dark-theme.svg" alt="Theme Icon">
+        <span>Toggle Theme</span>
+    </div>
+
+    <div class="container">
+        <div class="spiderman">
+            <div class="web" id="web"></div>
+            <img src="image.png" alt="Spider-Man" id="spiderman-img">
+        </div>
+    </div>
+
+    <div class="cards-container">
+        <div class="cv-container">
+            <h2>Ronik Basnet</h2>
+            <p>Email: basnet.ronik622@gmail.com</p>
+            <p>Phone: +977 9862740344</p>
+            <p>Experience: Web Developer at IT Bridge Nepal</p>
+            <p>Skills: HTML, CSS, JavaScript, C#, .NET, React, Node.js</p>
+        </div>
+
+        <div class="main-content">
+            <section class="portfolio-section">
+                <h2>Portfolio</h2>
+                <div class="portfolio">
+                    <div class="project">Project 1</div>
+                    <div class="project">Project 2</div>
+                    <div class="project">Project 3</div>
+                    <div class="project">Project 4</div>
+                </div>
+            </section>
+
+            <section class="timeline-section">
+                <h2>Web Development Timeline</h2>
+                <div class="timeline">
+                    <div class="timeline-event">Graduated with a CS Degree</div>
+                    <div class="timeline-event">Landed First Developer Job</div>
+                    <div class="timeline-event">Worked on Major Projects</div>
+                    <div class="timeline-event">Freelancing & Side Projects</div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-theme');
+            const isLightTheme = body.classList.contains('light-theme');
+            localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+        });
+
+        // Load saved theme from localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.add('light-theme');
+        }
+
+        // Scroll Animation
+        window.addEventListener("scroll", function() {
+            let scrollValue = window.scrollY;
+            const web = document.getElementById("web");
+            const spidey = document.getElementById("spiderman-img");
+            
+            web.style.height = (100 + scrollValue * 0.8) + "px";
+            spidey.style.top = (100 + scrollValue * 0.9) + "px";
+            spidey.style.transform = `rotate(${scrollValue * 0.1}deg)`;
         });
     </script>
 </body>
