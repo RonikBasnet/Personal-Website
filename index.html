@@ -86,13 +86,34 @@
             height: 100px;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="40" viewBox="0 0 10 40"><path d="M5 0 C 7 5, 3 10, 5 15 C 7 20, 3 25, 5 30 C 7 35, 3 40, 5 45" stroke="gray" stroke-width="2" fill="transparent"/><path d="M1 0 C 3 5, 7 10, 1 15 C 3 20, 7 25, 1 30 C 3 35, 7 40, 1 45" stroke="gray" stroke-width="1.5" fill="transparent"/></svg>') repeat-y;
             background-size: 100% auto;
+            animation: glow 2s infinite alternate;
         }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px rgba(230, 36, 41, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(230, 36, 41, 0.9);
+            }
+        }
+
         .spiderman img {
-            width: 180px;
+            width: 120px; /* Smaller size for mobile */
             position: relative;
             top: 100px;
             filter: drop-shadow(0 0 10px var(--primary-red));
             transition: transform 0.3s ease-in-out;
+            animation: swing 3s infinite ease-in-out;
+        }
+
+        @keyframes swing {
+            0%, 100% {
+                transform: rotate(-5deg);
+            }
+            50% {
+                transform: rotate(5deg);
+            }
         }
 
         .cards-container {
@@ -287,7 +308,12 @@
             }
             
             .spiderman {
-                display: none;
+                display: flex; /* Ensure Spider-Man is visible on mobile */
+                left: 10px; /* Adjust position for smaller screens */
+            }
+
+            .spiderman img {
+                width: 100px; /* Smaller size for mobile */
             }
         }
     </style>
@@ -303,7 +329,6 @@
         <div class="spiderman">
             <div class="web" id="web"></div>
             <img src="https://raw.githubusercontent.com/RonikBasnet/Personal-Website/main/image.png" alt="Spider-Man" id="spiderman-img">
-
         </div>
     </div>
 
