@@ -364,34 +364,57 @@
             </section>
         </div>
     </div>
+<script>
+    // Theme Toggle Functionality
+const themeToggle = document.getElementById("theme-toggle");
+const body = document.body;
 
-    <script>
-        // Theme Toggle Functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
+themeToggle.addEventListener("click", () => {
+    body.classList.toggle("light-theme");
+    const isLightTheme = body.classList.contains("light-theme");
+    localStorage.setItem("theme", isLightTheme ? "light" : "dark");
+});
 
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-theme');
-            const isLightTheme = body.classList.contains('light-theme');
-            localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
-        });
+// Load saved theme from localStorage
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "light") {
+    body.classList.add("light-theme");
+}
 
-        // Load saved theme from localStorage
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            body.classList.add('light-theme');
-        }
+// Scroll Animation
+window.addEventListener("scroll", function () {
+    let scrollValue = window.scrollY;
+    const web = document.getElementById("web");
+    const spidey = document.getElementById("spiderman-img");
 
-        // Scroll Animation
-        window.addEventListener("scroll", function() {
-            let scrollValue = window.scrollY;
-            const web = document.getElementById("web");
-            const spidey = document.getElementById("spiderman-img");
-            
-            web.style.height = (100 + scrollValue * 0.8) + "px";
-            spidey.style.top = (100 + scrollValue * 0.9) + "px";
-            spidey.style.transform = `rotate(${scrollValue * 0.01}deg)`;
-        });
+    web.style.height = 100 + scrollValue * 0.8 + "px";
+    spidey.style.top = 100 + scrollValue * 0.9 + "px";
+    spidey.style.transform = `rotate(${scrollValue * 0.01}deg)`;
+});
+
+// Make Spider-Man act as a scroll slider
+const spidey = document.getElementById("spiderman-img");
+let isDragging = false;
+let startY, startScroll;
+
+spidey.addEventListener("mousedown", (event) => {
+    isDragging = true;
+    startY = event.clientY;
+    startScroll = window.scrollY;
+    document.body.style.userSelect = "none"; // Prevent text selection while dragging
+});
+
+document.addEventListener("mousemove", (event) => {
+    if (!isDragging) return;
+    const deltaY = event.clientY - startY;
+    window.scrollTo(0, startScroll + deltaY * 2); // Adjust speed multiplier if needed
+});
+
+document.addEventListener("mouseup", () => {
+    isDragging = false;
+    document.body.style.userSelect = ""; // Re-enable text selection after dragging
+});
+
     </script>
 </body>
 </html>
